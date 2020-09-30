@@ -10,15 +10,22 @@ My girlfriend likes this idea, so she can long press the button for her Google D
 
 To be able to print from everywhere (Windows, Android, Linux, IOS), I install cups and google-cloud-print-connector
 
+## State
+It runs a few days without any error, but I did not test the installer scripts from scratch or any other distribution than Ubuntu 18 and Raspbian Full.
+
+Only Canon MX495 is tested, but using 'scannimage' with basic parameters (resolution=300, format=jpeg) should work on most scanners
+
+Please give [feedback](https://github.com/martinbreu/ocrscan2drive/issues/new) on any error or improvement suggestions.
+
+Feel free to open a PR.
 
 ## Features
 * Make Canon MX495 accessible for Windows/Linux/Android/Iphone with Raspberry Pi Zero (WLAN), using cups/google-connector
 * Scan jpeg using scanimage and upload to Google Drive using rclone
 * On PC create Backup of Google Drive on every boot up (Google Drive allows same folder/file names, so rclone dedupe combines folders and renames files)
 * Every 10 seconds: download scanned images and ocr using ocrmypdf (rotate 0-360°), to upload pdf's using rclone
-* Short button-press for me, long for girlfriend
+* Short button-press for me, long for girlfriend (indicated by light)
 * Upload a pdf or an image in any folder structure to gdrive/toOCR and it will get ocr-d and moved to gdrive/Dokumente (gdrive/toOCR/Maddie to gdriveMaddie/Dokumente)
-
 
 ## Requirements
 * Client ID + Secret from Google Drive
