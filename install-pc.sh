@@ -19,7 +19,7 @@ User=martinbreu
 Group=martinbreu
 ExecStartPre=/bin/sh -c \"until ping -c1 google.com; do sleep 1; done;\"
 ExecStart=-/usr/bin/rclone dedupe --dedupe-mode rename gdrive:
-ExecStart=/usr/bin/rclone sync --exclude \"/toOCR/**\" gdrive:/home/martinbreu/.google-drive/
+ExecStart=/usr/bin/rclone sync --exclude \"/toOCR/**\" gdrive: /home/martinbreu/.google-drive/
 [Install]
 WantedBy=multi-user.target" > /etc/systemd/system/pull-drive.service'
 sudo bash -c 'echo "[Unit]
