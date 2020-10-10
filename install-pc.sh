@@ -1,14 +1,16 @@
+sudo apt-get install rclone -y
+rclone config
+rclone config
 wget https://github.com/raspberrypi/rpi-imager/releases/download/v1.4/rpi-imager_1.4_amd64.deb
 sudo apt install ./rpi-imager_1.4_amd64.deb -y
 rpi-imager
 touch /media/martinbreu/boot/ssh
 nano /media/martinbreu/boot/wpa_supplicant.conf
 
-sudo apt-get install rclone -y
-rclone config
-rclone config
-
 mkdir /home/martinbreu/.google-drive
+sudo cp ocrscan2drive/ocr2drive.sh /opt/ocr2drive.sh
+sudo chown martinbreu:martinbreu /opt/ocr2drive.sh
+sudo chmod +x /opt/ocr2drive.sh
 sudo bash -c 'echo "[Unit]
 Description=pull-drive
 Requires=network-online.target
@@ -17,7 +19,7 @@ After=network-online.target
 Type=oneshot
 User=martinbreu
 Group=martinbreu
-ExecStartPre=/bin/sh -c \"until ping -c1 google.com; do sleep 1; done;\"
+ExecStartPre=/bin/sh -c \"until ping -c1 google.com >/dev/null 2>&1; do sleep 1; done;\"
 ExecStart=-/usr/bin/rclone dedupe --dedupe-mode rename gdrive:
 ExecStart=/usr/bin/rclone sync --exclude \"/toOCR/**\" gdrive: /home/martinbreu/.google-drive/
 [Install]
@@ -30,13 +32,7 @@ After=network-online.target docker.service
 Type=oneshot
 User=martinbreu
 Group=martinbreu
-ExecStartPre=/bin/sh -c \"until ping -c1 google.com >/dev/null 2>&1; do sleep 1; done;\"
-ExecStart=/usr/bin/rclone move --retries 1 gdrive:/toOCR/ /home/martinbreu/.google-drive/toOCR/
-ExecStart=-/usr/bin/find /home/martinbreu/.google-drive/toOCR -name \"*.*\" -exec /bin/echo \"{}\" \; -exec /usr/bin/docker run --rm -v \"/home/martinbreu/.google-drive/toOCR:/home/martinbreu/.google-drive/toOCR\" -i jbarlow83/ocrmypdf:v11.1.1 -l eng+deu --rotate-pages --rotate-pages-threshold 2.5 --image-dpi 300 --force-ocr --jbig2-lossy --optimize 2 \"{}\" \"{}\" \;
-ExecStart=-/usr/bin/find /home/martinbreu/.google-drive/toOCR -name \"*.*\" -exec /bin/echo \"{}\" \; -exec /usr/bin/docker run --rm -v \"/home/martinbreu/.google-drive/toOCR:/home/martinbreu/.google-drive/toOCR\" -i jbarlow83/ocrmypdf:v11.1.1 -l eng+deu --deskew --rotate-pages-threshold 2.5 --image-dpi 300 --force-ocr --jbig2-lossy --optimize 2 \"{}\" \"{}.pdf\" \; -exec /bin/rm \"{}\" \;
-ExecStart=/bin/sh -c \"/bin/cp -r /home/martinbreu/.google-drive/toOCR/. /home/martinbreu/.google-drive/Dokumente\"
-ExecStart=-/usr/bin/rclone move --retries 1 /home/martinbreu/.google-drive/toOCR/Maddie/ gdriveMaddie:/Dokumente/
-ExecStart=/usr/bin/rclone move --retries 1 /home/martinbreu/.google-drive/toOCR/ gdrive:/Dokumente/
+ExecStart=/bin/sh /opt/ocr2drive.sh
 [Install]
 WantedBy=multi-user.target" > /etc/systemd/system/ocr2drive.service'
 sudo bash -c 'echo "[Unit]

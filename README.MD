@@ -43,8 +43,8 @@ Feel free to open a PR.
 * On PC:
 
         git clone https://github.com/martinbreu/ocrscan2drive.git
-        sed -i "s/martinbreu/$HOSTNAME/g" /ocrscan2drive/install-pc.sh
-        sudo chmod +x /ocrscan2drive/install-pc.sh
+        sed -i "s/martinbreu/$HOSTNAME/g" ocrscan2drive/install-pc.sh
+        sudo chmod +x ocrscan2drive/install-pc.sh
         ./!$
         
         # (n, gdrive, 7, CLIENT-ID, CLIENT-SECRET, y, y, q)
@@ -75,7 +75,7 @@ Feel free to open a PR.
         ./!$
         
         # (n, gdrive, 12, CLIENT-ID, CLIENT-SECRET, 1, , , n, n), copy link to get code, (code, n, y, q)
-        # Add Printer: http://HOSTNAME:631 (use pi user and password)
+        # Add Printer: open http://{HOSTNAME}:631 (user=pi, password=set before with passwd)
 
 
 
