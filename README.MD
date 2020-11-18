@@ -40,6 +40,9 @@ Feel free to open a PR.
 
 
 ## Install
+
+Hinweis: Google Cloud Print wird ab dem 1. Januar 2021 nicht mehr unterstützt.
+
 * On PC:
 
         git clone https://github.com/martinbreu/ocrscan2drive.git
