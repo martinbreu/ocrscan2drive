@@ -11,13 +11,11 @@ My girlfriend likes this idea, so she can long press the button for her Google D
 To be able to print from everywhere (Windows, Android, Linux, IOS), I install cups and google-cloud-print-connector
 
 ## State
-It runs a few days without any error, but I did not test the installer scripts from scratch or any other distribution than Ubuntu 18 and Raspbian Full.
+It runs 2 months without any error, but I did not test the installer scripts from scratch or any other distribution than Ubuntu 18 and Raspbian Full.
 
-Only Canon MX495 is tested, but using 'scannimage' with basic parameters (resolution=300, format=jpeg) should work on most scanners
+Only Canon MX495 is tested, but using 'scannimage' with basic parameters (resolution=300, format=jpeg) should work on most scanners.
 
-Please give [feedback](https://github.com/martinbreu/ocrscan2drive/issues/new) on any error or improvement suggestions.
-
-Feel free to open a PR.
+Please give [feedback](https://github.com/martinbreu/ocrscan2drive/issues/new) on any error or improvement suggestions and feel free to open a PR.
 
 ## Features
 * Make Canon MX495 accessible for Windows/Linux/Android/Iphone with Raspberry Pi Zero (WLAN), using cups/google-connector
@@ -34,14 +32,14 @@ Feel free to open a PR.
         NEW PROJECT, CREATE, Credentials, CREATE CREDENTIALS, OAuth client ID, (CONFIGURE CONSENT SREEN, EXTERNAL, Enter any "Application name", Save, back to "Credentials"), Application type=Dektop app, CREATE
 
 * Raspberry Pi (I use Zero WH): https://www.amazon.de/dp/B07C7FHJDX/ref=cm_sw_em_r_mt_dp_BdjDFbKCMQB2K
-* Button(GPIO 23) + Light(GPIO 23): I use 3-wire components, if you use 2-wire you may change GPIO.PUD_DOWN to GPIO.PUD_UP in scan2drive.py, like here: https://www.makeuseof.com/tag/add-button-raspberry-pi-project/
+* Button(GPIO 23 - Button - 3.3v) + Light(GPIO 24 - ~220 Ohm Resistor - Light - GND), details see here: https://www.makeuseof.com/tag/add-button-raspberry-pi-project/
 * micro-usb to "printer adapter" or usb: https://www.amazon.de/dp/B07MGFRHHR/ref=cm_sw_em_r_mt_dp_ufjDFbRPJJK0J
 * Linux PC with [Docker Desktop](https://hub.docker.com/search?q=&type=edition&offering=community&operating_system=linux)
 
 
 ## Install
 
-Hinweis: Google Cloud Print wird ab dem 1. Januar 2021 nicht mehr unterstützt.
+Note: After December 31, 2020, Google Cloud Print will no longer be supported.
 
 * On PC:
 
@@ -85,6 +83,6 @@ Hinweis: Google Cloud Print wird ab dem 1. Januar 2021 nicht mehr unterstützt.
 ## Roadmap/Bugs:
 * Create PR on sane to add ADF-Document-Feeder support for MX495, then double-scan and sort out empty pages
 * --rotate-pages recognized but does not rotate. if only rotate param, it rotates. Workaround for now is to OCR twice!
-* Create an image of SD-Card and test
-* Add Gmail attachments to drive (extract from .mbox)?
-* OCR on Pi (never tried, but Pi Zero could take hours to OCR, maybe try a bigger Pi)
+* Create an image of SD-Card and test because re-install takes very long
+* Add Gmail attachments to Google Drive (extract from .mbox)?
+* OCR on Pi (never tried, but Pi Zero could take hours to OCR, maybe test a bigger Pi in future)
