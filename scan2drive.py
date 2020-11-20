@@ -50,7 +50,7 @@ try:
     print("ocrscan2drive by martinbreu")
     subprocess.run(("mkdir", tempDir))
     while True:
-        GPIO.wait_for_edge(pinButton, GPIO.RISING)
+        GPIO.wait_for_edge(pinButton, GPIO.FALLING)
         drivePath = drivePathMartin
         thread = threading.Thread(target=scan_upload)
         thread.start()
