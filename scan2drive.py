@@ -9,8 +9,8 @@ import threading
 drivePathMartin = "gdrive:toOCR/"
 drivePathMaddie = "gdrive:toOCR/Maddie/"
 pinLight = 24
-pinButton = 23
-tempDir = "/home/pi/ocrscan2drive/upload/"
+pinButton = 18
+tempDir = "/home/pi/scan2drive/upload/"
 scanFormat = "jpeg"
 scanCommand = ("scanimage", "--format", scanFormat, "--resolution", "300")
 scanFileName = "%Y-%m-%d_%H-%M-%S"
@@ -44,19 +44,19 @@ def scan_upload():
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(pinLight, GPIO.OUT)
-GPIO.setup(pinButton, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(pinButton, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 try:
     print("ocrscan2drive by martinbreu")
     subprocess.run(("mkdir", tempDir))
     while True:
-        GPIO.wait_for_edge(pinButton, GPIO.FALLING)
+        GPIO.wait_for_edge(pinButton, GPIO.RISING)
         drivePath = drivePathMartin
         thread = threading.Thread(target=scan_upload)
         thread.start()
         time.sleep(0.5)
         while thread.is_alive():
-            if GPIO.input(pinButton):
+            if not GPIO.input(pinButton):
                 drivePath = drivePathMaddie
                 GPIO.output(pinLight, 0)
                 time.sleep(0.8)

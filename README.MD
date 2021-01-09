@@ -8,7 +8,7 @@ From everywhere, I open Google Drive and use the search bar to find my document 
 
 My girlfriend likes this idea, so she can long press the button for her Google Drive.
 
-To be able to print from everywhere (Windows, Android, Linux, IOS), I install cups and google-cloud-print-connector
+To be able to print from everywhere (Windows, Android, Linux, IOS), I install cups and, in the past google-cloud-print-connector (deprecated and commented out)
 
 ## State
 It runs 2 months without any error, but I did not test the installer scripts from scratch or any other distribution than Ubuntu 18 and Raspbian Full.
@@ -18,7 +18,7 @@ Only Canon MX495 is tested, but using 'scannimage' with basic parameters (resolu
 Please give [feedback](https://github.com/martinbreu/ocrscan2drive/issues/new) on any error or improvement suggestions and feel free to open a PR.
 
 ## Features
-* Make Canon MX495 accessible for Windows/Linux/Android/Iphone with Raspberry Pi Zero (WLAN), using cups/google-connector
+* Make Canon MX495 accessible for Windows/Linux/Android/Iphone with Raspberry Pi Zero (WLAN)
 * Scan jpeg using scanimage and upload to Google Drive using rclone
 * On PC create Backup of Google Drive on every boot up (Google Drive allows same folder/file names, so rclone dedupe combines folders and renames files)
 * Every 10 seconds: download scanned images and ocr using ocrmypdf (rotate 0-360°), to upload pdf's using rclone
@@ -32,14 +32,12 @@ Please give [feedback](https://github.com/martinbreu/ocrscan2drive/issues/new) o
         NEW PROJECT, CREATE, Credentials, CREATE CREDENTIALS, OAuth client ID, (CONFIGURE CONSENT SREEN, EXTERNAL, Enter any "Application name", Save, back to "Credentials"), Application type=Dektop app, CREATE
 
 * Raspberry Pi (I use Zero WH): https://www.amazon.de/dp/B07C7FHJDX/ref=cm_sw_em_r_mt_dp_BdjDFbKCMQB2K
-* Button(GPIO 23 - Button - 3.3v) + Light(GPIO 24 - ~220 Ohm Resistor - Light - GND), details see here: https://www.makeuseof.com/tag/add-button-raspberry-pi-project/
+* Button(GPIO 18 - Button - GND) + Light(GPIO 24 - ~220 Ohm Resistor - Light - GND), details see here: https://www.makeuseof.com/tag/add-button-raspberry-pi-project/
 * micro-usb to "printer adapter" or usb: https://www.amazon.de/dp/B07MGFRHHR/ref=cm_sw_em_r_mt_dp_ufjDFbRPJJK0J
 * Linux PC with [Docker Desktop](https://hub.docker.com/search?q=&type=edition&offering=community&operating_system=linux)
 
 
 ## Install
-
-Note: After December 31, 2020, Google Cloud Print will no longer be supported.
 
 * On PC:
 
